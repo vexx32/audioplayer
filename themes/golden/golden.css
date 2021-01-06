@@ -1,0 +1,21 @@
+/* Music Player theme settings */
+
+.player-container.theme {
+    --font-family: 'Segoe UI';
+    /* colors */
+    --text-color: rgb(202, 173, 118);
+    --background-color: rgb(33, 30, 24);
+    --background-image: url();
+    --border-color: rgba(255, 220, 174, 0.35);
+    --playback-bar-color: #8b5f00;
+    --progress-indicator-color: var(--background-color);
+    --track-title-color: var(--text-color);
+    /* button backgrounds */
+    --play-button: transparent url(./themes/golden/play.svg) top left/contain;
+    --pause-button: transparent url(./themes/golden/pause.svg) top left/contain;
+    --previous-button: transparent url(./themes/golden/previous.svg) top left/contain;
+    --next-button: transparent url(./themes/golden/next.svg) top left/contain;
+    --loop-button-off: transparent url(./themes/golden/loop-off.svg) top left/contain;
+    --loop-button-on: transparent url(./themes/golden/loop-on.svg) top left/contain;
+    --playlist-button: transparent url(./themes/golden/playlist.svg) top left/contain;
+}
