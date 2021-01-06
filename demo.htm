@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--
+    <link rel="stylesheet" href="https://static.tumblr.com/igrnacw/CxCqmh41d/player.css" />
+    -->
+    <link rel="stylesheet" href="player.css" />
+    <!--
+        <script type="text/javascript" src="https://static.tumblr.com/drgo8ev/oq7qmgeqo/player.js"></script>
+    -->
+    <script type="text/javascript">
+        /**
+         * Re-creates any script elements and inserts them into the DOM, overwriting the original.
+         * This forces the script to be reloaded, which is required to support scripts loaded added
+         * directly into an .innerHTML property.
+         *
+         * @param element The element to look for scripts to reload in.
+         **/
+        function reloadScripts(element) {
+            var loadedScripts = element.getElementsByTagName("script");
+            for (var script of loadedScripts) {
+                var scriptElement = document.createElement('script');
+
+                for (var name of script.getAttributeNames()) {
+                    scriptElement.setAttribute(name, script.attributes[name].value);
+                }
+
+                scriptElement.text = script.text;
+                script.replaceWith(scriptElement);
+            }
+        }
+
+        /**
+         * Finds elements with 'data-include-html' attributes and inserts the referenced file's
+         * content into them as child elements.
+         **/
+        function includeHTML() {
+            var includeElements = document.querySelectorAll("*[data-include-html]");
+            for (var i = 0; i < includeElements.length; i++) {
+                var element = includeElements[i];
+                var fileToInclude = element.getAttribute("data-include-html");
+
+                if (fileToInclude) {
+                    /* Make an HTTP request using the attribute value as the file name: */
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (this.readyState === 4) {
+                            if (this.status === 200 || this.status === 0) {
+                                element.innerHTML = this.responseText;
+                                /* Remove the attribute, and call this function once more: */
+                                element.removeAttribute("data-include-html");
+                                reloadScripts(element);
+                                includeHTML();
+                            } else if (this.status === 404) {
+                                element.innerHTML = "Page not found.";
+                                element.removeAttribute("data-include-html");
+                            }
+                        }
+                    };
+                    request.open("GET", fileToInclude, true);
+                    request.send();
+                    /* Exit the function: */
+                    return;
+                }
+            }
+        }
+
+        window.onload = includeHTML;
+    </script>
+</head>
+
+<body>
+    <div data-include-html="player.htm"></div>
+</body>
+
+</html>

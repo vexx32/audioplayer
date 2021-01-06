@@ -1,0 +1,18 @@
+.player-container.theme {
+    --font-family: 'Tahoma';
+    /* colors */
+    --background-color: rgb(240, 240, 240);
+    --background-image: url(https://static.tumblr.com/drgo8ev/CAMqmfffc/stars-color.png);
+    --border-color: rgba(0, 0, 0, 0.15);
+    --playback-bar-color: rgba(255, 99, 9, 0.5);
+    --progress-indicator-color: rgb(251, 176, 255);
+    --track-title-color: rgb(40, 0, 63);
+    /* button backgrounds */
+    --play-button: url(https://static.tumblr.com/drgo8ev/EiFqmfgvn/play.png);
+    --pause-button: url(https://static.tumblr.com/drgo8ev/R2zqmfgw2/pause.png);
+    --previous-button: url(https://static.tumblr.com/drgo8ev/Tkcqmfz4d/previous.png);
+    --next-button: url(https://static.tumblr.com/drgo8ev/cQQqmfz41/next.png);
+    --loop-button-off: url(https://www.wikplayer.com/skins/wikfull/funkyLady/shuffleRepeatBtn.png) -20px 0px/110px 50px no-repeat content-box;
+    --loop-button-on: url(https://www.wikplayer.com/skins/wikfull/funkyLady/shuffleRepeatBtn.png) -42px 0px/110px 50px no-repeat content-box;
+    --playlist-button: url(https://static.tumblr.com/drgo8ev/Cusqmffef/playlist.png);
+}

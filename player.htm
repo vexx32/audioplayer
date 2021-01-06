@@ -1,0 +1,64 @@
+<article class="player-container theme">
+
+    <figure class="player">
+
+        <header class="controls-box">
+            <button class="previous-track-btn disabled"><span class="screen-reader-text">Previous track button</span></button>
+            <button class="main-toggle-btn">
+                <div class="large-play-btn"><span class="screen-reader-text">Play/Pause button</span></div>
+            </button>
+            <button class="next-track-btn"><span class="screen-reader-text">Next track button</span></button>
+            <button class="toggle-loop-btn"><span class="screen-reader-text">Toggle repeat current track on/off</span></button>
+        </header>
+        <!-- /.controls-box -->
+
+        <div class="info-box">
+            <div class="track-info-box">
+                <div class="track-title-text"></div>
+            </div>
+            <!-- /.track-info-box -->
+
+            <div class="progress-box">
+                <div class="progress">
+                    <div class="progress-buffer"></div>
+                    <div class="progress-indicator"></div>
+                </div>
+            </div>
+            <!-- /.progress-box -->
+
+            <div class="track-info-box audio-time">
+                <time class="current-time">00:00</time> /
+                <time class="duration">00:00</time>
+            </div>
+            <!-- /.audio-time -->
+
+            <div class="volume-box">
+                <div class="volume">
+                    <div class="volume-indicator"></div>
+                </div>
+            </div>
+            <!-- /.volume-box -->
+        </div>
+        <!-- /.info-box -->
+
+        <audio id="audio" preload="auto" tabindex="0" data-loop-track="false" volume="0.5">
+
+            <source src="https://archive.org/download/samples2003-11-21.flac16/samples2003-11-21d2t04.mp3"
+                data-track-title="Feel Us Shaking" />
+
+            Your browser does not support HTML5 audio. :(
+        </audio>
+
+        <details class="play-list">
+            <summary class="play-list-btn"><span class="screen-reader-text">Toggle playlist</span></summary>
+
+            <ol class="play-list-popout">
+                <h2 class="play-list-title">Playlist</h2>
+            </ol>
+        </details>
+
+    </figure>
+    <!-- /.player -->
+
+</article>
+<script type="text/javascript" src="player.js"></script>

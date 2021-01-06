@@ -1,0 +1,17 @@
+.player-container.theme {
+    --font-family: 'Tahoma';
+    /* colors */
+    --background-color: rgb(255, 255, 255);
+    --background-image: url();
+    --border-color: rgba(0, 0, 0, 0.15);
+    --playback-bar-color: rgb(238, 238, 238);
+    --progress-indicator-color: rgb(170, 170, 170);
+    --track-title-color: rgb(153, 153, 153);
+    --play-button: url(https://static.tumblr.com/igrnacw/4tEqmi9cw/play-pause.png);
+    --pause-button: url(https://static.tumblr.com/igrnacw/4tEqmi9cw/play-pause.png);
+    --previous-button: url(https://static.tumblr.com/igrnacw/jNyqmi9dn/previous.png);
+    --next-button: url(https://static.tumblr.com/igrnacw/bEBqmi9dy/next.png);
+    --loop-button-off: url(https://static.tumblr.com/igrnacw/WYYqmi9ea/repeat-off.png);
+    --loop-button-on: url(https://static.tumblr.com/igrnacw/31Eqmi9el/repeat-on.png);
+    --playlist-button: url(https://static.tumblr.com/igrnacw/Pavqmi9ey/menu.png);
+}

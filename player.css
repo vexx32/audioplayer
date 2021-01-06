@@ -1,0 +1,298 @@
+@charset "UTF-8";
+.player-container.theme {
+    --font-family: 'Segoe UI';
+    /* colors */
+    --text-color: #000;
+    --background-color: white;
+    --background-image: url();
+    --border-color: rgba(0, 0, 0, 0.15);
+    --playback-bar-color: #337ab7;
+    --progress-indicator-color: var(--background-color);
+    --track-title-color: #000;
+    /* button backgrounds */
+    --play-button: green;
+    --pause-button: red;
+    --previous-button: orange;
+    --next-button: yellow;
+    --loop-button-off: gray;
+    --loop-button-on: blue;
+    --playlist-button: brown;
+}
+
+.player-container {
+    font-family: var(--font-family), sans-serif;
+    font-size: 1em;
+    margin: 0 auto;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    border-top: 2px solid var(--border-color);
+}
+
+.player-container .screen-reader-text:not(:focus):not(:active) {
+    /* Reusable, toolbox kind of class */
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+}
+
+.player-container .disabled {
+    color: #888;
+    cursor: default;
+}
+
+.player-container .show {
+    display: inline-block !important;
+}
+
+.player-container .player {
+    height: 2rem;
+    margin: 0;
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 0.5rem;
+    align-content: center;
+    background-color: var(--background-color);
+    background-image: var(--background-image);
+    background-position: top left;
+}
+
+.player-container .player .controls-box {
+    grid-column: 1 / 2;
+    padding-left: 0.5rem;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    column-gap: 1.25rem;
+}
+
+.player-container .player .controls-box button {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    overflow: hidden;
+}
+
+.player-container .player .controls-box button:focus {
+    outline-style: auto;
+    outline-color: rgba(0, 100, 230, 0.35);
+}
+
+.player-container .player .controls-box .main-toggle-btn .large-play-btn,
+.player-container .player .controls-box .main-toggle-btn .large-pause-btn {
+    width: 100%;
+    height: 100%;
+}
+
+.player-container .player .controls-box .main-toggle-btn .large-play-btn {
+    background: var(--play-button);
+}
+
+.player-container .player .controls-box .main-toggle-btn .large-pause-btn {
+    background: var(--pause-button);
+}
+
+.player-container .player .controls-box .previous-track-btn {
+    background: var(--previous-button);
+}
+
+.player-container .player .controls-box .next-track-btn {
+    background: var(--next-button);
+}
+
+.player-container .player .controls-box .toggle-loop-btn {
+    background: var(--loop-button-off);
+}
+
+.player-container .player .controls-box .toggle-loop-btn.on {
+    background: var(--loop-button-on);
+}
+
+.player-container .player .play-list .play-list-btn {
+    background: var(--playlist-button);
+}
+
+.player-container .player .info-box .volume-box {
+    padding: 0.05em 0;
+    width: 8em;
+}
+
+.player-container .player .info-box {
+    grid-column: 2 / 3;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.player-container .player .info-box .track-info-box {
+    visibility: hidden;
+    font-size: 0.8em;
+    color: var(--track-title-color);
+    text-shadow: 2px 2px var(--background-color), 2px -2px var(--background-color), -2px 2px var(--background-color), -2px -2px var(--background-color), 2px 0 var(--background-color), 0 2px var(--background-color), -2px 0 var(--background-color), 0 -2px var(--background-color);
+}
+
+.player-container .player .info-box .track-info-box .track-title-text {
+    pointer-events: none;
+}
+
+.player-container .player .info-box .audio-time {
+    pointer-events: none;
+    padding: 0 0 0 5px;
+    width: 80px;
+    visibility: visible;
+}
+
+.player-container .player .info-box .track-info-box:before,
+.player-container .player .info-box .track-info-box:after {
+    content: " ";
+    display: table;
+}
+
+.player-container .player .info-box .track-info-box:after {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.player-container .player .info-box .progress-box {
+    position: relative;
+    padding: 0.05em 0;
+}
+
+.player-container .player .info-box .progress-box .progress {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    height: 0.7em;
+    position: relative;
+    width: auto;
+}
+
+.player-container .player .info-box .progress-box .progress .progress-buffer {
+    background: var(--playback-bar-color);
+    height: 100%;
+    width: 0;
+}
+
+.player-container .player .info-box .progress-box .progress .progress-indicator {
+    background: var(--progress-indicator-color);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    top: -0.1em;
+    width: 2em;
+    height: 0.8em;
+}
+
+.player-container .player .info-box .volume-box .volume {
+    background: var(--background-color);
+    border: 1px solid var(--border-color);
+    height: 0.7em;
+    position: relative;
+}
+
+.player-container .player .info-box .volume-box .volume .volume-indicator {
+    background: var(--progress-indicator-color);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    cursor: pointer;
+    left: calc(100% - 0.5em);
+    position: absolute;
+    top: -0.1em;
+    width: 0.5em;
+    height: 0.8em;
+}
+
+.player-container .player:before,
+.player-container .player:after {
+    content: " ";
+    display: table;
+}
+
+.player-container .player:after {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.player-container .player .play-list {
+    grid-column: 3 / 4;
+    padding-right: 0.5rem;
+    font-size: 0.8em;
+}
+
+.player-container .player .play-list .play-list-btn {
+    width: 26px;
+    height: 26px;
+    margin: 50% 0;
+}
+
+.player-container .player .play-list .play-list-popout {
+    list-style-type: decimal;
+    border: 2px solid var(--border-color);
+    border-bottom-color: transparent;
+    background-color: var(--background-color);
+    margin: 0;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    width: 15rem;
+    max-height: 75vh;
+    overflow-y: auto;
+    padding: 0 1rem 0 2rem;
+}
+
+.player-container .player .play-list .play-list-popout .play-list-title {
+    font-size: 1.25em;
+    font-style: italic;
+}
+
+.player-container .player .play-list .play-list-popout .play-list-row {
+    margin: 10px 0;
+    text-overflow: ellipsis;
+}
+
+.player-container .play-list .play-list-popout .play-list-row .playlist-track {
+    color: var(--track-title-color);
+    text-decoration: none;
+}
+
+.player-container .play-list .play-list-popout .play-list-row .playlist-track:hover {
+    text-decoration: underline;
+}
+
+.player-container .play-list .play-list-popout .play-list-row .playlist-track.active-track {
+    font-weight: bold;
+}
+
+.player-container .play-list .play-list-popout .play-list-row:after {
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+details.play-list>summary {
+    list-style: none;
+}
+
+details.play-list>summary::-webkit-details-marker {
+    display: none;
+}
