@@ -524,7 +524,7 @@ class AudioPlayer {
 
             indicatorLocation = progressBarIndicatorWidth * (currentTime / duration);
 
-            _progressBarIndicator.style.left = indicatorLocation + "px";
+            _progressBarIndicator.style.left = Math.trunc(indicatorLocation) + "px";
         };
 
         /**
