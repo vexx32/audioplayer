@@ -73,6 +73,16 @@ The base theme code looks like this:
     --loop-button-off: gray;
     --loop-button-on: blue;
     --playlist-button: brown;
+    /* button text */
+    --button-text-color: #000;
+    --button-font: var(--font-family);
+    --play-button-text: '';
+    --pause-button-text: '';
+    --previous-button-text: '';
+    --next-button-text: '';
+    --loop-button-off-text: '';
+    --loop-button-on-text: '';
+    --playlist-button-text: '';
 }
 ```
 
