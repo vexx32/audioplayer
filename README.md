@@ -16,14 +16,14 @@ Credit where credit is due; the base code (which I've modified and extended to s
 There are a couple of things you'll need in order to use this audio player.
 It consists of some HTML code you'll need to add to the page directly, a script file that handles the audio playing and some of the interface elements, and a CSS file to make things pretty.
 
-You can also use one of the provided themes, create your own theme, and (if you want) further customise the player by overriding the default styles completely.
+You can also use one of the provided themes, create your own theme, and (if you want) further customise the player by overriding the default styles however you want.
 
 ### 1. Add the style sheet to your page
 
 Place the following code inside your`<head>...</head>` section, **before** any `<style>` sections you may have there; this will ensure you can override the styles as much as you might want to, including using any of the provided themes you like.
 
 ```html
-<link rel="stylesheet" href="https://static.tumblr.com/aqcfmms/UA9qmjo14/player.css" />
+<link rel="stylesheet" href="https://static.tumblr.com/aqcfmms/mW9qmjo8i/player.css" />
 ```
 
 ### 2. Add the player HTML code to your page

@@ -176,7 +176,7 @@
 .player-container .player .info-box .progress-box .progress {
     background: var(--background-color);
     border: 1px solid var(--border-color);
-    height: 0.7em;
+    height: 0.6em;
     position: relative;
     border-radius: 4px;
 }
@@ -202,7 +202,7 @@
 .player-container .player .info-box .volume-box .volume {
     background: var(--background-color);
     border: 1px solid var(--border-color);
-    height: 0.7em;
+    height: 0.6em;
     position: relative;
     border-radius: 4px;
 }
