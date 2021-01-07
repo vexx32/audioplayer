@@ -3,19 +3,18 @@
 .player-container.theme {
     --font-family: 'Segoe UI';
     /* colors */
-    --text-color: rgb(202, 173, 118);
+    --text-color: #caad76;
     --background-color: rgb(155, 129, 76);
-    --background-image: url();
     --border-color: rgba(255, 255, 255, 0.35);
     --playback-bar-color: #8b5f00;
-    --progress-indicator-color: var(--background-color);
+    --progress-indicator-color: rgb(218, 181, 18);
     --track-title-color: var(--text-color);
     /* button backgrounds */
-    --play-button: transparent url(./themes/golden/play.svg) top left/contain;
-    --pause-button: transparent url(./themes/golden/pause.svg) top left/contain;
-    --previous-button: transparent url(./themes/golden/previous.svg) top left/contain;
-    --next-button: transparent url(./themes/golden/next.svg) top left/contain;
-    --loop-button-off: transparent url(./themes/golden/loop-off.svg) top left/contain;
-    --loop-button-on: transparent url(./themes/golden/loop-on.svg) top left/contain;
-    --playlist-button: transparent url(./themes/golden/playlist.svg) top left/contain;
+    --play-button: transparent url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/golden/play.svg) top left/contain;
+    --pause-button: transparent url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/golden/pause.svg) top left/contain;
+    --previous-button: transparent url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/golden/previous.svg) top left/contain;
+    --next-button: transparent url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/golden/next.svg) top left/contain;
+    --loop-button-off: transparent url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/golden/loop-off.svg) top left/contain;
+    --loop-button-on: transparent url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/golden/loop-on.svg) top left/contain;
+    --playlist-button: transparent url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/golden/playlist.svg) top left/contain;
 }
