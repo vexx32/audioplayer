@@ -488,24 +488,23 @@ class AudioPlayer {
          * @param audioPlaying A boolean value indicating if audio is playing or paused.
          **/
         var _updatePlayStatus = function(audioPlaying) {
+            var mainButton = _elements.playerButtons.playBtn;
             if (audioPlaying) {
-                _elements.playerButtons.playBtn.children[0].className = "large-pause-btn";
+                mainButton.classList.remove("large-play-btn");
+                mainButton.classList.add("large-pause-btn");
             } else {
-                _elements.playerButtons.playBtn.children[0].className = "large-play-btn";
+                mainButton.classList.remove("large-pause-btn");
+                mainButton.classList.add("large-play-btn");
             }
 
             //Update next and previous buttons accordingly
+            var prevButton = _elements.playerButtons.previousTrackBtn;
             if (_currentTrack === 0) {
-                _elements.playerButtons.previousTrackBtn.disabled = true;
-                _elements.playerButtons.previousTrackBtn.className = "previous-track-btn disabled";
+                prevButton.disabled = true;
+                prevButton.classList.add("disabled");
             } else if (_currentTrack > 0 && _currentTrack !== _elements.playlist.length) {
-                _elements.playerButtons.previousTrackBtn.disabled = false;
-                _elements.playerButtons.previousTrackBtn.className = "previous-track-btn";
-                _elements.playerButtons.nextTrackBtn.disabled = false;
-                _elements.playerButtons.nextTrackBtn.className = "next-track-btn";
-            } else if (_currentTrack === _elements.playlist.length) {
-                _elements.playerButtons.nextTrackBtn.disabled = true;
-                _elements.playerButtons.nextTrackBtn.className = "next-track-btn disabled";
+                prevButton.disabled = false;
+                prevButton.classList.remove("disabled");
             }
         };
 
@@ -531,7 +530,9 @@ class AudioPlayer {
          *
          **/
         var _resetPlayStatus = function() {
-            _elements.playerButtons.playBtn.children[0].className = "large-play-btn";
+            var button = _elements.playerButtons.playBtn;
+            button.classList.remove("large-pause-btn");
+            button.classList.add("large-play-btn");
         };
 
         _initPlayer();
