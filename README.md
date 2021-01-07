@@ -5,6 +5,8 @@ So I built this.
 
 Credit where credit is due; the base code (which I've modified and extended to suit the needs of this project) comes from [a CodePen by Craig Stroman](https://codepen.io/craigstroman/pen/aOyRYx), which as a public Pen is licensed under the MIT license as detailed in CodePen's [Terms of Service](https://blog.codepen.io/documentation/terms-of-service/).
 
+![example image of the audio player, showing the default pale white/grey theme](./themes/default/preview.png)
+
 - [How to Use](#how-to-use)
   - [1. Add the style sheet to your page](#1-add-the-style-sheet-to-your-page)
   - [2. Add the player HTML code to your page](#2-add-the-player-html-code-to-your-page)
