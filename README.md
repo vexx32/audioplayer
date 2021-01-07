@@ -26,7 +26,7 @@ You can also use one of the provided themes, create your own theme, and (if you 
 Place the following code inside your`<head>...</head>` section, **before** any `<style>` sections you may have there; this will ensure you can override the styles as much as you might want to, including using any of the provided themes you like.
 
 ```html
-<link rel="stylesheet" href="https://static.tumblr.com/aqcfmms/mW9qmjo8i/player.css" />
+<link rel="stylesheet" href="https://static.tumblr.com/aqcfmms/MvOqmk25g/player.css" />
 ```
 
 ### 2. Add the player HTML code to your page
