@@ -4,9 +4,9 @@
     --font-family: 'Segoe UI';
     /* colors */
     --text-color: rgb(202, 173, 118);
-    --background-color: rgb(33, 30, 24);
+    --background-color: rgb(155, 129, 76);
     --background-image: url();
-    --border-color: rgba(255, 220, 174, 0.35);
+    --border-color: rgba(255, 255, 255, 0.35);
     --playback-bar-color: #8b5f00;
     --progress-indicator-color: var(--background-color);
     --track-title-color: var(--text-color);
