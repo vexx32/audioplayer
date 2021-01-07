@@ -6,9 +6,10 @@ So I built this.
 Credit where credit is due; the base code (which I've modified and extended to suit the needs of this project) comes from [a CodePen by Craig Stroman](https://codepen.io/craigstroman/pen/aOyRYx), which as a public Pen is licensed under the MIT license as detailed in CodePen's [Terms of Service](https://blog.codepen.io/documentation/terms-of-service/).
 
 - [How to Use](#how-to-use)
-  - [Add the style sheet to your page](#add-the-style-sheet-to-your-page)
-  - [Add the player HTML code](#add-the-player-html-code)
-  - [Add a theme! (Optional)](#add-a-theme-optional)
+  - [1. Add the style sheet to your page](#1-add-the-style-sheet-to-your-page)
+  - [2. Add the player HTML code to your page](#2-add-the-player-html-code-to-your-page)
+  - [3. Add a theme! (Optional)](#3-add-a-theme-optional)
+- [Custom Themes](#custom-themes)
 - [Contributing](#contributing)
 
 ## How to Use
@@ -41,9 +42,10 @@ Themes consist of a small handful of style options, including:
 - Player background image
 - Button backgrounds
 
-You can customize the player beyond this with minimal effort, but I thought it'd be nice to just condense the most likely things that would need changing most often into a single rule set, so you don't have to manually find the bits and pieces for everything when you just want to use a fun background or some nicer colours.
+You can customize the player beyond this with minimal effort, but I thought it'd be nice to just condense the most likely things that would need changing most often into a single rule set.
+That way, you don't have to manually find the bits and pieces for everything when you just want to use a fun background or some nicer colours.
 
-Take the theme CSS and place it inside a `<style>...</style>` section on your page (should be in the `<head>...</head>` section).
+Take the theme CSS from one of the [provided themes](./themes/theme-list.md) (or [make your own](#custom-themes)) and place it inside a `<style>...</style>` section on your page (should be in the `<head>...</head>` section).
 
 ## Custom Themes
 
@@ -76,7 +78,7 @@ Button background values are passed to a standard `background:` CSS property, so
 
 ## Contributing
 
-If you wanna contribute code or themes or whatnot for others to use, you're more than welcome to.
+If you wanna contribute code or themes or anything else for others to use, you're more than welcome to.
 Drop themes in the `./themes` folder, either just as a .css file or a .css file with some finished assets in a subfolder.
 Draft assets or Photoshop/Affinity Photo project files can go in the `./icons` folder, under a subdirectory indicating which theme they're associated with, if any.
 
