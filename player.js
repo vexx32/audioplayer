@@ -126,7 +126,6 @@ class AudioPlayer {
                 var trackTitle = track.getAttribute("data-track-title");
                 var playlistLink = document.createElement("a");
                 playlistLink.href = "#";
-                playlistLink.title = trackTitle;
                 playlistLink.textContent = trackTitle;
                 playlistLink.classList.add("playlist-track");
                 playlistLink.setAttribute("data-track-index", i);
