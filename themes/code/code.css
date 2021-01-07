@@ -1,0 +1,27 @@
+.player-container.theme {
+    --font-family: 'Segoe UI';
+    /* colors */
+    --text-color: rgb(255, 136, 0);
+    --background-color: #222;
+    --border-color: rgb(226, 125, 10);
+    --playback-bar-color: rgb(255, 174, 82);
+    --progress-indicator-color: rgb(255, 136, 0);
+    --track-title-color: rgb(255, 163, 43);
+    /* button backgrounds */
+    --play-button: transparent;
+    --pause-button: transparent;
+    --previous-button: transparent;
+    --next-button: transparent;
+    --loop-button-off: transparent;
+    --loop-button-on: transparent;
+    --playlist-button: transparent;
+    /* button text */
+    --button-text-color: var(--text-color);
+    --play-button-text: '>';
+    --pause-button-text: 'II';
+    --previous-button-text: '<<';
+    --next-button-text: '>>';
+    --loop-button-off-text: '~';
+    --loop-button-on-text: '\221e';
+    --playlist-button-text: '(+)';
+}

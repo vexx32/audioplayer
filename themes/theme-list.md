@@ -17,3 +17,11 @@ This theme is the default, and will be used if no other styling is applied.
 A dimmer, soft gold theme.
 
 [Theme CSS](./golden/golden.css)
+
+## Code
+
+![text buttons and amber theme](./code/preview.png)
+
+A theme with text button labels in a warm amber.
+
+[Theme CSS](./code/code.css)
