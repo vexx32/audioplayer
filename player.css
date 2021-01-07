@@ -17,6 +17,16 @@
     --loop-button-off: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/loop-off.svg) top left/contain;
     --loop-button-on: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/loop-on.svg) top left/contain;
     --playlist-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/playlist.svg) top left/contain;
+    /* button text */
+    --button-text-color: #000;
+    --button-font: var(--font-family);
+    --play-button-text: '';
+    --pause-button-text: '';
+    --previous-button-text: '';
+    --next-button-text: '';
+    --loop-button-off-text: '';
+    --loop-button-on-text: '';
+    --playlist-button-text: '';
 }
 
 .player-container {
@@ -38,8 +48,8 @@
     overflow: hidden;
     white-space: nowrap;
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: 0;
+    height: 0;
 }
 
 .player-container .disabled {
@@ -74,7 +84,8 @@
     column-gap: 1.25rem;
 }
 
-.player-container .player .controls-box button {
+.player-container .player .controls-box button,
+.player-container .player .play-list .play-list-btn {
     display: inline-block;
     width: 26px;
     height: 26px;
@@ -82,6 +93,9 @@
     background-color: transparent;
     padding: 0;
     overflow: hidden;
+    text-align: center;
+    color: var(--button-text-color);
+    font-family: var(--button-font);
 }
 
 .player-container .player .controls-box button:focus {
@@ -89,38 +103,60 @@
     outline-color: rgba(0, 100, 230, 0.35);
 }
 
-.player-container .player .controls-box .main-toggle-btn .large-play-btn,
-.player-container .player .controls-box .main-toggle-btn .large-pause-btn {
-    width: 100%;
-    height: 100%;
-}
-
-.player-container .player .controls-box .main-toggle-btn .large-play-btn {
+.player-container .player .controls-box .main-toggle-btn.large-play-btn {
     background: var(--play-button);
 }
 
-.player-container .player .controls-box .main-toggle-btn .large-pause-btn {
+.player-container .player .controls-box .main-toggle-btn.large-play-btn::before {
+    content: var(--play-button-text);
+}
+
+.player-container .player .controls-box .main-toggle-btn.large-pause-btn {
     background: var(--pause-button);
+}
+
+.player-container .player .controls-box .main-toggle-btn.large-pause-btn::before {
+    content: var(--pause-button-text);
 }
 
 .player-container .player .controls-box .previous-track-btn {
     background: var(--previous-button);
 }
 
+.player-container .player .controls-box .previous-track-btn::before {
+    content: var(--previous-button-text);
+}
+
 .player-container .player .controls-box .next-track-btn {
     background: var(--next-button);
+}
+
+.player-container .player .controls-box .next-track-btn::before {
+    content: var(--next-button-text);
 }
 
 .player-container .player .controls-box .toggle-loop-btn {
     background: var(--loop-button-off);
 }
 
+.player-container .player .controls-box .toggle-loop-btn::before {
+    content: var(--loop-button-off-text);
+}
+
 .player-container .player .controls-box .toggle-loop-btn.on {
     background: var(--loop-button-on);
 }
 
+.player-container .player .controls-box .toggle-loop-btn.on::before {
+    content: var(--loop-button-on-text);
+}
+
 .player-container .player .play-list .play-list-btn {
     background: var(--playlist-button);
+}
+
+.player-container .player .play-list .play-list-btn::before {
+    content: var(--playlist-button-text);
 }
 
 .player-container .player .info-box .volume-box {
@@ -138,7 +174,9 @@
 
 .player-container .player .info-box .track-info-box {
     visibility: hidden;
+    text-align: center;
     font-size: 0.8em;
+    padding-bottom: 0.2em;
     color: var(--track-title-color);
     text-shadow: 2px 2px var(--background-color), 2px -2px var(--background-color), -2px 2px var(--background-color), -2px -2px var(--background-color), 2px 0 var(--background-color), 0 2px var(--background-color), -2px 0 var(--background-color), 0 -2px var(--background-color);
 }
@@ -149,7 +187,6 @@
 
 .player-container .player .info-box .audio-time {
     pointer-events: none;
-    padding: 0 0 0 5px;
     width: 80px;
     visibility: visible;
 }
@@ -170,13 +207,13 @@
 
 .player-container .player .info-box .progress-box {
     position: relative;
-    padding: 0.05em 0;
+    padding: 0.05rem 0;
 }
 
 .player-container .player .info-box .progress-box .progress {
     background: var(--background-color);
     border: 1px solid var(--border-color);
-    height: 0.6em;
+    height: 0.6rem;
     position: relative;
     border-radius: 4px;
 }
@@ -185,6 +222,7 @@
     background: var(--playback-bar-color);
     height: 100%;
     width: 0;
+    border-radius: 4px;
 }
 
 .player-container .player .info-box .progress-box .progress .progress-indicator {
@@ -194,15 +232,16 @@
     cursor: pointer;
     left: 0;
     position: absolute;
-    top: -0.1em;
-    width: 2em;
-    height: 0.8em;
+    top: -0.1rem;
+    width: 2rem;
+    height: 0.8rem;
+    box-sizing: border-box;
 }
 
 .player-container .player .info-box .volume-box .volume {
     background: var(--background-color);
     border: 1px solid var(--border-color);
-    height: 0.6em;
+    height: 0.6rem;
     position: relative;
     border-radius: 4px;
 }
@@ -212,11 +251,12 @@
     border: 1px solid var(--border-color);
     border-radius: 3px;
     cursor: pointer;
-    left: calc(100% - 0.5em);
+    left: calc(100% - 0.5rem);
     position: absolute;
-    top: -0.1em;
-    width: 0.5em;
-    height: 0.8em;
+    top: -0.1rem;
+    width: 0.5rem;
+    height: 0.8rem;
+    box-sizing: border-box;
 }
 
 .player-container .player:before,
@@ -236,13 +276,8 @@
 .player-container .player .play-list {
     grid-column: 3 / 4;
     padding-right: 0.5rem;
-    font-size: 0.8em;
-}
-
-.player-container .player .play-list .play-list-btn {
     width: 26px;
     height: 26px;
-    margin: 50% 0;
 }
 
 .player-container .player .play-list .play-list-popout {
@@ -254,6 +289,7 @@
     border-bottom-color: transparent;
     border-top-left-radius: 4px;
     background-color: var(--background-color);
+    font-size: 0.8em;
     margin: 0;
     position: absolute;
     bottom: 100%;
