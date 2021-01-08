@@ -16,3 +16,8 @@
     --loop-button-on: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/neoma/loop-on.png) top left/contain;
     --playlist-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/neoma/playlist.png) top left/contain;
 }
+
+.player-container .player .play-list .play-list-popout {
+    position: fixed;
+    bottom: 2rem;
+}
