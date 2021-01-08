@@ -7,8 +7,8 @@
     --playback-bar-color: rgb(238, 238, 238);
     --progress-indicator-color: rgb(170, 170, 170);
     --track-title-color: rgb(153, 153, 153);
-    --play-button: url(https://static.tumblr.com/igrnacw/4tEqmi9cw/play-pause.png);
-    --pause-button: url(https://static.tumblr.com/igrnacw/4tEqmi9cw/play-pause.png);
+    --play-button: url(https://static.tumblr.com/igrnacw/676qmlucc/play.svg) center center/contain;
+    --pause-button: url(https://static.tumblr.com/igrnacw/xwnqmluci/pause.svg) center center/contain;
     --previous-button: url(https://static.tumblr.com/igrnacw/jNyqmi9dn/previous.png);
     --next-button: url(https://static.tumblr.com/igrnacw/bEBqmi9dy/next.png);
     --loop-button-off: url(https://static.tumblr.com/igrnacw/WYYqmi9ea/repeat-off.png);
