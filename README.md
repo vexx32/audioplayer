@@ -51,28 +51,28 @@ Take the theme CSS from one of the [provided themes](./themes/theme-list.md) (or
 
 ## Custom Themes
 
-The base theme code looks like this:
+The theme code for the default theme looks like this:
 
 ```css
 /* Music Player theme settings */
 .player-container.theme {
     --font-family: 'Segoe UI';
     /* colors */
-    --text-color: #000;
-    --background-color: white;
+    --text-color: #333;
+    --background-color: #eee;
     --background-image: url();
-    --border-color: rgba(0, 0, 0, 0.15);
-    --playback-bar-color: #337ab7;
+    --border-color: rgba(0, 0, 0, 0.4);
+    --playback-bar-color: #aaa;
     --progress-indicator-color: var(--background-color);
-    --track-title-color: #000;
+    --track-title-color: #444;
     /* button backgrounds */
-    --play-button: green;
-    --pause-button: red;
-    --previous-button: orange;
-    --next-button: yellow;
-    --loop-button-off: gray;
-    --loop-button-on: blue;
-    --playlist-button: brown;
+    --play-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/play.svg) top left/contain;
+    --pause-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/pause.svg) top left/contain;
+    --previous-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/previous.svg) top left/contain;
+    --next-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/next.svg) top left/contain;
+    --loop-button-off: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/loop-off.svg) top left/contain;
+    --loop-button-on: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/loop-on.svg) top left/contain;
+    --playlist-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/themes/default/playlist.svg) top left/contain;
     /* button text */
     --button-text-color: #000;
     --button-font: var(--font-family);
@@ -86,6 +86,7 @@ The base theme code looks like this:
 }
 ```
 
+Any of these values can be modified to adjust the look of the player to your liking.
 Button background values are passed to a standard `background:` CSS property, so you can specify colors, images, sizes, positions, etc. for the button background.
 
 ## Contributing
