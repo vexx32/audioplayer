@@ -76,13 +76,7 @@ class AudioPlayer {
 
         var _updateVolumeIndicatorPosition = function(newPosition) {
             var volumeBarWidth = _volumeBar.offsetWidth - _volumeIndicator.offsetWidth;
-            if ((newPosition >= 1) && (newPosition <= volumeBarWidth)) {
-                _volumeIndicator.style.left = newPosition + "px";
-            } else if (newPosition <= 0) {
-                _volumeIndicator.style.left = "0";
-            } else if (newPosition > volumeBarWidth) {
-                _volumeIndicator.style.left = volumeBarWidth + "px";
-            }
+            _volumeIndicator.style.left = constrain(newPosition, 0, volumeBarWidth) + "px";
         };
 
         /**
@@ -234,7 +228,12 @@ class AudioPlayer {
             window.addEventListener("mouseup", _mouseUp, false);
 
             //Check the audio player's volume attribute and set the slider and volume accordingly.
-            _setVolume(parseFloat(_elements.audio.getAttribute("volume")));
+            var volume = 1;
+            if (_elements.audio.hasAttribute("volume")) {
+                volume = parseFloat(_elements.audio.getAttribute("volume"));
+            }
+
+            _setVolume(volume);
         };
 
         var _handleAudioLoadError = function(event) {
@@ -330,7 +329,6 @@ class AudioPlayer {
          **/
         var _moveVolumeIndicator = function(event) {
             var newPosition = 0;
-            var volumeBarWidth = _volumeBar.offsetWidth - _volumeIndicator.offsetWidth;
 
             newPosition = event.pageX - _elements.volumeBar.offsetLeft;
             _updateVolumeIndicatorPosition(newPosition);
