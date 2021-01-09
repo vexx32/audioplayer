@@ -70,6 +70,7 @@
     grid-template-columns: auto 1fr auto;
     column-gap: 0.5rem;
     align-content: center;
+    padding: 0 0.5rem;
     background-color: var(--background-color);
     background-image: var(--background-image);
     background-position: top left;
@@ -319,7 +320,7 @@
     font-style: italic;
     padding: 0.25em 2em;
     margin: 0 -2em;
-    box-shadow: 0 1px 1px var(--border-color);
+    box-shadow: 0 1px 1px -1px var(--border-color);
 }
 
 .player-container .player .play-list .play-list-popout .play-list-row {
