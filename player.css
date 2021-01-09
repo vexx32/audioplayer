@@ -72,6 +72,7 @@
     column-gap: 0.5rem;
     align-content: center;
     padding: 0 0.5rem;
+    box-sizing: border-box;
     background-color: var(--background-color);
     background-image: var(--background-image);
     background-position: top left;
@@ -79,7 +80,6 @@
 
 .player-container .player .controls-box {
     grid-column: 1 / 2;
-    padding-left: 0.5rem;
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr auto;
@@ -277,7 +277,6 @@
 
 .player-container .player .play-list {
     grid-column: 3 / 4;
-    padding-right: 0.5rem;
     width: 26px;
     height: 26px;
 }
