@@ -1,9 +1,9 @@
 /**
  * Constrains a value to a given upper and lower bound.
  *
- * @param number The value to constrain.
- * @param lowerBound The minimum allowed value.
- * @param upperBound The maximum allowed value.
+ * @param {Number} number The value to constrain.
+ * @param {Number} lowerBound The minimum allowed value.
+ * @param {Number} upperBound The maximum allowed value.
  **/
 function constrain(number, lowerBound, upperBound) {
     return Math.max(
@@ -17,7 +17,7 @@ class AudioPlayer {
         "use strict";
 
         // Private variables
-        var _elements = {
+        const _elements = {
             audio: document.getElementById("audio"),
             playerButtons: {
                 playBtn: document.querySelector(".main-toggle-btn"),
@@ -32,14 +32,16 @@ class AudioPlayer {
         };
         var _currentTrack = null;
         var _trackLoaded = false;
-        var _loopTrack = _elements.audio.getAttribute("data-loop-track") === "true";
+        var _loopTrack = _elements.audio.dataset.loopTrack === "true";
+        var _changePageTitle = _elements.audio.dataset.changePageTitle === "true";
 
         var _progressClicked = false;
-        var _progressBarIndicator = _elements.progressBar.querySelector(".progress-indicator");
-        var _progressBar = _elements.progressBar.querySelector(".progress");
+        const _progressBarIndicator = _elements.progressBar.querySelector(".progress-indicator");
+        const _progressBar = _elements.progressBar.querySelector(".progress");
+
         var _volumeClicked = false;
-        var _volumeBar = _elements.volumeBar.querySelector(".volume");
-        var _volumeIndicator = _elements.volumeBar.querySelector(".volume-indicator");
+        const _volumeBar = _elements.volumeBar.querySelector(".volume");
+        const _volumeIndicator = _elements.volumeBar.querySelector(".volume-indicator");
 
         this.getCurrentTrack = function() {
             if (!_trackLoaded) {
@@ -48,81 +50,115 @@ class AudioPlayer {
 
             return {
                 index: _currentTrack,
-                title: _elements.playlist[_currentTrack].title
+                title: _elements.playlist[_currentTrack].textContent
             };
         };
 
+        /**
+         * Get the list of songs.
+         * @returns {Array} an array of objects describing the index and title of each song in the playlist.
+         */
         this.getPlaylist = function() {
-            return _elements.playlist;
+            const list = [];
+            for (let item of _elements.playlist) {
+                list.push({
+                    index: item.dataset.trackIndex,
+                    title: item.textContent,
+                    songUrl: _elements.audio.children[item.dataset.trackIndex].src
+                });
+            }
+
+            return list;
         }
 
-        var _setVolume = function(volume) {
-            var volumeBarWidth = _volumeBar.offsetWidth - _volumeIndicator.offsetWidth;
+
+        /**
+         * @param {Number} volume
+         */
+        const _setVolume = function(volume) {
+            const volumeBarWidth = _volumeBar.offsetWidth - _volumeIndicator.offsetWidth;
 
             _updateVolumeIndicatorPosition(volumeBarWidth * volume);
             _setVolumeLevel(volume);
         };
 
-        /**
-         * Set the audio playback volume.
-         *
-         * @param volume The audio volume, must be between 0 and 1.
-         **/
-        this.setVolume = _setVolume;
-
-        var _setVolumeLevel = function(volume) {
+        const _setVolumeLevel = function(volume) {
             _elements.audio.volume = constrain(volume, 0, 1);
         };
 
-        var _updateVolumeIndicatorPosition = function(newPosition) {
-            var volumeBarWidth = _volumeBar.offsetWidth - _volumeIndicator.offsetWidth;
+        const _updateVolumeIndicatorPosition = function(newPosition) {
+            const volumeBarWidth = _volumeBar.offsetWidth - _volumeIndicator.offsetWidth;
             _volumeIndicator.style.left = constrain(newPosition, 0, volumeBarWidth) + "px";
         };
 
         /**
+         * Set the audio playback volume.
+         *
+         * @param {Number} volume The audio volume, must be between 0 and 1.
+         **/
+        this.setVolume = _setVolume;
+
+        /**
+         * Set whether the audio player changes the page title to match the name of each track.
+         * @param {Boolean} value
+         */
+        this.changePageTitle = function(value) {
+            _changePageTitle = typeof value === "string" ? value === "true" : value === true;
+        }
+
+        /**
          * Determines the buffer progress.
          *
-         * @param audio The audio element on the page.
+         * @param {HTMLElement} audio The audio element on the page.
          **/
-        var _bufferProgress = function(audio) {
-            var bufferedTime = 0;
+        const _bufferProgress = function(audio) {
+            let bufferedTime = 0;
             if (audio.readyState === 4) {
                 bufferedTime = (audio.buffered.end(0) * 100) / audio.duration;
             }
-            var progressBuffer = _elements.progressBar.querySelector(".progress-buffer");
 
+            const progressBuffer = _elements.progressBar.querySelector(".progress-buffer");
             progressBuffer.style.width = bufferedTime + "%";
         };
 
-        var _handleProgressIndicatorClick = function(event) {
-            var progressBar = document.querySelector(".progress-box");
+        /**
+         * @param {Event} event
+         * @returns {number} The distance in pixels from the left border of the progress element to the left border of the
+         * progress indicator element.
+         */
+        const _handleProgressIndicatorClick = function(event) {
+            const progressBar = document.querySelector(".progress-box");
             return (event.pageX - progressBar.offsetLeft) / progressBar.querySelector('.progress').offsetWidth;
         };
 
-        var _handleVolumeControlClick = function(event) {
-            var volumeBar = document.querySelector(".volume-box");
-            var volume = (event.pageX - volumeBar.offsetLeft) / volumeBar.querySelector(".volume").offsetWidth;
+        /**
+         * @param {Event} event
+         */
+        const _handleVolumeControlClick = function(event) {
+            const volumeBar = document.querySelector(".volume-box");
+            const volume = (event.pageX - volumeBar.offsetLeft) / volumeBar.querySelector(".volume").offsetWidth;
             _setVolumeLevel(volume);
         };
 
         /**
          * Populates the playlist element with selectable track names
          *
-         * @param audioSources An array of &lt;source&gt; elements from the player's &lt;audio&gt; element.
-         * @param listContainer The &lt;ul&gt; or &lt;ol&gt; container element to add &lt;li&gt; playlist elements to.
+         * @param {HTMLCollection} audioSources An array of &lt;source&gt; elements from the player's &lt;audio&gt; element.
+         * @param {HTMLElement} listContainer The &lt;ul&gt; or &lt;ol&gt; container element to add &lt;li&gt; playlist elements to.
+         * @returns {HTMLCollection} A list of the playlist elements generated.
          **/
-        var _createTrackList = function(audioSources, listContainer) {
-            for (var i = 0; i < audioSources.length; i++) {
-                var track = audioSources[i];
-                var listItem = document.createElement("li");
+        const _createTrackList = function(audioSources, listContainer) {
+            for (let i = 0; i < audioSources.length; i++) {
+                let track = audioSources[i];
+                let listItem = document.createElement("li");
                 listItem.classList.add("play-list-row");
 
-                var trackTitle = track.getAttribute("data-track-title");
-                var playlistLink = document.createElement("a");
+                let trackTitle = track.dataset.trackTitle;
+                let playlistLink = document.createElement("a");
                 playlistLink.href = "#";
                 playlistLink.textContent = trackTitle;
                 playlistLink.classList.add("playlist-track");
-                playlistLink.setAttribute("data-track-index", i);
+                playlistLink.dataset.trackIndex = i;
 
                 listItem.append(playlistLink);
                 listContainer.append(listItem);
@@ -134,9 +170,12 @@ class AudioPlayer {
             return listContainer.getElementsByClassName("playlist-track");
         };
 
-        var _selectPlaylistTrack = function(event) {
+        /**
+         * @param {Event} event
+         */
+        const _selectPlaylistTrack = function(event) {
             event.preventDefault();
-            var selectedTrack = parseInt(this.getAttribute("data-track-index"));
+            let selectedTrack = parseInt(this.dataset.trackIndex);
 
             if (selectedTrack !== _currentTrack) {
                 _resetPlayStatus();
@@ -154,10 +193,8 @@ class AudioPlayer {
 
         /**
          * Initializes the html5 audio player and the playlist.
-         *
          **/
-        var _initPlayer = function() {
-
+        const _initPlayer = function() {
             if (_currentTrack === 0 || _currentTrack === null) {
                 _elements.playerButtons.previousTrackBtn.disabled = true;
             }
@@ -228,7 +265,7 @@ class AudioPlayer {
             window.addEventListener("mouseup", _mouseUp, false);
 
             //Check the audio player's volume attribute and set the slider and volume accordingly.
-            var volume = 1;
+            let volume = 1;
             if (_elements.audio.hasAttribute("volume")) {
                 volume = parseFloat(_elements.audio.getAttribute("volume"));
             }
@@ -236,7 +273,7 @@ class AudioPlayer {
             _setVolume(volume);
         };
 
-        var _handleAudioLoadError = function(event) {
+        const _handleAudioLoadError = function(event) {
             switch (event.target.error.code) {
                 case event.target.error.MEDIA_ERR_ABORTED:
                     alert('The audio playback was deliberately aborted.');
@@ -254,7 +291,8 @@ class AudioPlayer {
                     alert('An unknown error occurred.');
                     break;
             }
-            trackLoaded = false;
+
+            _trackLoaded = false;
             _resetPlayStatus();
         };
 
@@ -263,7 +301,7 @@ class AudioPlayer {
          *
          * @param e The event object.
          **/
-        var _progressMouseDown = function(event) {
+        const _progressMouseDown = function(event) {
             if (_trackLoaded) {
                 _moveProgressIndicator(event);
                 window.addEventListener("mousemove", _moveProgressIndicator, true);
@@ -273,7 +311,12 @@ class AudioPlayer {
             }
         };
 
-        var _volumeMouseDown = function(event) {
+        /**
+         * Handles the mousedown event on the volume bar by a user and determines if the mouse is being moved.
+         *
+         * @param e The event object.
+         **/
+        const _volumeMouseDown = function(event) {
             _moveVolumeIndicator(event);
             window.addEventListener("mousemove", _moveVolumeIndicator, true);
 
@@ -285,10 +328,10 @@ class AudioPlayer {
          *
          * @param e The event object.
          **/
-        var _mouseUp = function(event) {
+        const _mouseUp = function(event) {
             if (_progressClicked) {
-                var duration = parseFloat(audio.duration);
-                var progressIndicatorClick = parseFloat(_handleProgressIndicatorClick(event));
+                const duration = parseFloat(audio.duration);
+                const progressIndicatorClick = parseFloat(_handleProgressIndicatorClick(event));
                 window.removeEventListener("mousemove", _moveProgressIndicator, true);
 
                 _elements.audio.currentTime = duration * progressIndicatorClick;
@@ -305,12 +348,11 @@ class AudioPlayer {
         /**
          * Moves the progress indicator to a new point in the audio.
          *
-         * @param event The event object.
+         * @param {Event} event The event object.
          **/
-        var _moveProgressIndicator = function(event) {
-            var newPosition = 0;
-            var progressBarWidth = _elements.progressBar.querySelector(".progress").offsetWidth - _progressBarIndicator.offsetWidth;
-
+        const _moveProgressIndicator = function(event) {
+            const progressBarWidth = _progressBar.offsetWidth - _progressBarIndicator.offsetWidth;
+            let newPosition = 0;
             newPosition = event.pageX - _elements.progressBar.offsetLeft;
 
             if ((newPosition >= 1) && (newPosition <= progressBarWidth)) {
@@ -325,21 +367,20 @@ class AudioPlayer {
         /**
          * Moves the progress indicator to a new point in the audio.
          *
-         * @param event The event object.
+         * @param {Event} event The event object.
          **/
-        var _moveVolumeIndicator = function(event) {
-            var newPosition = 0;
-
+        const _moveVolumeIndicator = function(event) {
+            let newPosition = 0;
             newPosition = event.pageX - _elements.volumeBar.offsetLeft;
+
             _updateVolumeIndicatorPosition(newPosition);
             _handleVolumeControlClick(event);
         };
 
         /**
          * Controls playback of the audio element.
-         *
          **/
-        var _playBack = function() {
+        const _playBack = function() {
             if (_elements.audio.paused) {
                 _elements.audio.play();
                 _updatePlayStatus(true);
@@ -353,24 +394,21 @@ class AudioPlayer {
 
         /**
          * Sets the track if it hasn't already been loaded yet.
-         *
          **/
-        var _setTrack = function() {
+        const _setTrack = function() {
             if (_elements.audio.children.length === 1) {
                 _currentTrack = 0;
             }
 
-            var songURL = _elements.audio.children[_currentTrack].src;
+            const songURL = _elements.audio.children[_currentTrack].src;
 
             _elements.audio.setAttribute("src", songURL);
             _elements.audio.load();
 
             _progressBarIndicator.style.left = 0;
-
             _trackLoaded = true;
 
             _setTrackTitle(_currentTrack, _elements.playlist);
-
             _setActiveItem(_currentTrack, _elements.playlist);
 
             _elements.trackInfoBox.style.visibility = "visible";
@@ -381,12 +419,12 @@ class AudioPlayer {
         /**
          * Sets the actively playing item within the playlist.
          *
-         * @param currentTrack The current track number being played.
-         * @param playlist The playlist object.
+         * @param {Number} currentTrack The current track number being played.
+         * @param {HTMLCollection} playlist The playlist object.
          **/
-        var _setActiveItem = function(currentTrack, playlist) {
-            for (var i = 0; i < playlist.length; i++) {
-                var trackTitle = playlist[i];
+        const _setActiveItem = function(currentTrack, playlist) {
+            for (let i = 0; i < playlist.length; i++) {
+                let trackTitle = playlist[i];
                 if (trackTitle.classList.contains('active-track')) {
                     trackTitle.classList.remove('active-track');
                 }
@@ -398,52 +436,48 @@ class AudioPlayer {
         /**
          * Sets the text for the currently playing song.
          *
-         * @param currentTrack The current track number being played.
-         * @param playlist The playlist object.
+         * @param {Number} currentTrack The current track number being played.
+         * @param {HTMLCollection} playlist The playlist object.
          **/
-        var _setTrackTitle = function(currentTrack, playlist) {
-            var trackTitleBox = document.querySelector(".player .info-box .track-info-box .track-title-text");
-            var trackTitle = playlist[currentTrack].outerText;
+        const _setTrackTitle = function(currentTrack, playlist) {
+            const trackTitleBox = document.querySelector(".player .info-box .track-info-box .track-title-text");
+            const trackTitle = playlist[currentTrack].outerText;
 
             trackTitleBox.innerHTML = null;
             trackTitleBox.innerHTML = trackTitle;
 
-            document.title = trackTitle;
+            if (_changePageTitle) {
+                document.title = trackTitle;
+            }
         };
 
         /**
          * Plays the next track when a track has ended playing.
-         *
          **/
-        var _trackHasEnded = function() {
+        const _trackHasEnded = function() {
             parseInt(_currentTrack);
             if (!_loopTrack) {
                 _currentTrack = (_currentTrack === _elements.playlist.length - 1) ? 0 : _currentTrack + 1;
             }
+
             _trackLoaded = false;
 
             _resetPlayStatus();
-
             _setTrack();
         };
 
         /**
          * Updates the time for the song being played.
-         *
          **/
-        var _trackTimeChanged = function() {
-            var currentTimeBox = document.querySelector(".player .info-box .track-info-box.audio-time .current-time");
-            var currentTime = audio.currentTime;
-            var duration = audio.duration;
-            var durationBox = document.querySelector(".player .info-box .track-info-box.audio-time .duration");
-            var trackCurrentTime = _trackTime(currentTime);
-            var trackDuration = _trackTime(duration);
+        const _trackTimeChanged = function() {
+            const currentTimeBox = document.querySelector(".player .info-box .track-info-box.audio-time .current-time");
+            const durationBox = document.querySelector(".player .info-box .track-info-box.audio-time .duration");
 
             currentTimeBox.innerHTML = null;
-            currentTimeBox.innerHTML = trackCurrentTime;
+            currentTimeBox.innerHTML = _trackTime(audio.currentTime);
 
             durationBox.innerHTML = null;
-            durationBox.innerHTML = trackDuration;
+            durationBox.innerHTML = _trackTime(audio.duration);
 
             _updateProgressIndicator(audio);
             _bufferProgress(audio);
@@ -452,14 +486,14 @@ class AudioPlayer {
         /**
          * A utility function for converting a time in milliseconds to a readable time of minutes and seconds.
          *
-         * @param seconds The time in seconds.
+         * @param {number} seconds The time in seconds.
          *
-         * @return time The time in minutes and/or seconds.
+         * @return {string} The time in minutes and/or seconds.
          **/
-        var _trackTime = function(seconds) {
-            var min = 0;
-            var sec = Math.floor(seconds);
-            var time = 0;
+        const _trackTime = function(seconds) {
+            let min = 0;
+            let sec = Math.floor(seconds);
+            let time = 0;
 
             min = Math.floor(sec / 60);
             if (isNaN(min)) {
@@ -474,7 +508,6 @@ class AudioPlayer {
             }
 
             sec = sec >= 10 ? sec : '0' + sec;
-
             time = min + ':' + sec;
 
             return time;
@@ -485,8 +518,8 @@ class AudioPlayer {
          *
          * @param audioPlaying A boolean value indicating if audio is playing or paused.
          **/
-        var _updatePlayStatus = function(audioPlaying) {
-            var mainButton = _elements.playerButtons.playBtn;
+        const _updatePlayStatus = function(audioPlaying) {
+            const mainButton = _elements.playerButtons.playBtn;
             if (audioPlaying) {
                 mainButton.classList.remove("large-play-btn");
                 mainButton.classList.add("large-pause-btn");
@@ -496,7 +529,7 @@ class AudioPlayer {
             }
 
             //Update next and previous buttons accordingly
-            var prevButton = _elements.playerButtons.previousTrackBtn;
+            const prevButton = _elements.playerButtons.previousTrackBtn;
             if (_currentTrack === 0) {
                 prevButton.disabled = true;
                 prevButton.classList.add("disabled");
@@ -510,13 +543,13 @@ class AudioPlayer {
          * Updates the location of the progress indicator according to how much time left in audio.
          *
          **/
-        var _updateProgressIndicator = function() {
-            var currentTime = parseFloat(_elements.audio.currentTime);
-            var duration = parseFloat(_elements.audio.duration);
-            var indicatorLocation = 0;
-            var progressBarWidth = parseFloat(_elements.progressBar.offsetWidth);
-            var progressIndicatorWidth = parseFloat(_progressBarIndicator.offsetWidth);
-            var progressBarIndicatorWidth = progressBarWidth - progressIndicatorWidth;
+        const _updateProgressIndicator = function() {
+            const currentTime = parseFloat(_elements.audio.currentTime);
+            const duration = parseFloat(_elements.audio.duration);
+            const progressBarWidth = parseFloat(_elements.progressBar.offsetWidth);
+            const progressIndicatorWidth = parseFloat(_progressBarIndicator.offsetWidth);
+            const progressBarIndicatorWidth = progressBarWidth - progressIndicatorWidth;
+            let indicatorLocation = 0;
 
             indicatorLocation = progressBarIndicatorWidth * (currentTime / duration);
 
@@ -525,10 +558,9 @@ class AudioPlayer {
 
         /**
          * Resets all toggle buttons to be play buttons.
-         *
          **/
         var _resetPlayStatus = function() {
-            var button = _elements.playerButtons.playBtn;
+            const button = _elements.playerButtons.playBtn;
             button.classList.remove("large-pause-btn");
             button.classList.add("large-play-btn");
         };
