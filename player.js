@@ -464,6 +464,7 @@ class AudioPlayer {
             }
 
             _trackLoaded = false;
+            document.title = document.title.substr(2);
 
             _resetPlayStatus();
             _setTrack();
