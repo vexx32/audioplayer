@@ -1,0 +1,21 @@
+/* Music Player theme settings */
+
+.player-container.theme {
+    --font-family: Laila, sans-serif;
+    /* colors */
+    --text-color: #aaa;
+    --background-color: #fff3f7;
+    --background-image: url();
+    --border-color: var(--text-color);
+    --playback-bar-color: var(--text-color);
+    --progress-indicator-color: var(--background-color);
+    --track-title-color: var(--text-color);
+    /* button backgrounds */
+    --play-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/ania/play-pause.png);
+    --pause-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/ania/play-pause.png);
+    --previous-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/ania/previous.png);
+    --next-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/ania/next.png);
+    --loop-button-off: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/ania/loop-off.svg) top left/contain;
+    --loop-button-on: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/ania/loop-on.svg) top left/contain;
+    --playlist-button: url(https://raw.githubusercontent.com/vexx32/audioplayer/main/tumblr/ania/playlist.png);
+}
