@@ -195,10 +195,6 @@ class AudioPlayer {
          * Initializes the html5 audio player and the playlist.
          **/
         const _initPlayer = function() {
-            if (_currentTrack === 0 || _currentTrack === null) {
-                _elements.playerButtons.previousTrackBtn.disabled = true;
-            }
-
             //Generate playlist entries from the audio elements
             _elements.playlist = _createTrackList(_elements.audio.children, document.querySelector(".play-list .play-list-popout"));
 
@@ -235,7 +231,7 @@ class AudioPlayer {
 
             //Previous track button clicked.
             _elements.playerButtons.previousTrackBtn.addEventListener("click", function(event) {
-                if (this.disabled !== true) {
+                if (this.disabled !== true && _currentTrack !== null) {
                     let audio = _elements.audio;
                     if (audio.currentTime > 2 || _currentTrack === 0) {
                         audio.currentTime = 0;
