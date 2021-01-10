@@ -236,10 +236,15 @@ class AudioPlayer {
             //Previous track button clicked.
             _elements.playerButtons.previousTrackBtn.addEventListener("click", function(event) {
                 if (this.disabled !== true) {
-                    _currentTrack--;
-                    _trackLoaded = false;
-                    _resetPlayStatus();
-                    _setTrack();
+                    let audio = _elements.audio;
+                    if (audio.currentTime > 2 || _currentTrack === 0) {
+                        audio.currentTime = 0;
+                    } else {
+                        _currentTrack--;
+                        _trackLoaded = false;
+                        _resetPlayStatus();
+                        _setTrack();
+                    }
                 }
             }, false);
 
@@ -530,16 +535,6 @@ class AudioPlayer {
             } else {
                 mainButton.classList.remove("large-pause-btn");
                 mainButton.classList.add("large-play-btn");
-            }
-
-            //Update next and previous buttons accordingly
-            const prevButton = _elements.playerButtons.previousTrackBtn;
-            if (_currentTrack === 0) {
-                prevButton.disabled = true;
-                prevButton.classList.add("disabled");
-            } else if (_currentTrack > 0 && _currentTrack !== _elements.playlist.length) {
-                prevButton.disabled = false;
-                prevButton.classList.remove("disabled");
             }
         };
 
