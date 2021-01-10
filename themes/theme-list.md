@@ -2,7 +2,7 @@
 
 [Back to Readme](../../..)
 
-These themes are all works in progress and any modifications or suggestions are more than welcome.
+Some of these themes are works in progress and any modifications or suggestions are more than welcome.
 
 ## Default
 
@@ -10,11 +10,19 @@ These themes are all works in progress and any modifications or suggestions are 
 
 This theme is the default, and will be used if no other styling is applied.
 
+## Dark
+
+![the dark theme](./dark/preview.png)
+
+A dark theme with subtle warm tones threaded throughout.
+
+[Theme CSS](./dark/dark.css)
+
 ## Golden
 
 ![an all-gold theme for the music player](./golden/preview.png)
 
-A dimmer, soft gold theme.
+A dim, soft gold theme.
 
 [Theme CSS](./golden/golden.css)
 
