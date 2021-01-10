@@ -401,6 +401,9 @@ class AudioPlayer {
             }
 
             const songURL = _elements.audio.children[_currentTrack].src;
+            if (!_elements.audio.paused) {
+                _playBack();
+            }
 
             _elements.audio.setAttribute("src", songURL);
             _elements.audio.load();
