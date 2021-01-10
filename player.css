@@ -71,7 +71,7 @@
     grid-template-columns: auto 1fr auto;
     column-gap: 0.5rem;
     align-content: center;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     box-sizing: border-box;
     background-color: var(--background-color);
     background-image: var(--background-image);
