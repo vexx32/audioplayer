@@ -92,6 +92,19 @@ class AudioPlayer {
         };
 
         /**
+         * Updates the loop button to match the given looping setting.
+         * @param {Boolean} loop The current looping setting, the button icon will be updated to match.
+         */
+        const _updateLoopIcon = function(loop) {
+            const button = _elements.playerButtons.toggleLoopBtn;
+            if (loop) {
+                button.classList.add('on');
+            } else if (button.classList.contains('on')) {
+                button.classList.remove('on');
+            }
+        };
+
+        /**
          * Set the audio playback volume.
          *
          * @param {Number} volume The audio volume, must be between 0 and 1.
@@ -247,11 +260,7 @@ class AudioPlayer {
             //Toggle repeat button clicked
             _elements.playerButtons.toggleLoopBtn.addEventListener("click", function(event) {
                 _loopTrack = !_loopTrack;
-                if (_loopTrack) {
-                    this.classList.add('on');
-                } else if (this.classList.contains('on')) {
-                    this.classList.remove('on');
-                }
+                _updateLoopIcon(_loopTrack);
             }, false);
 
             //User is moving progress indicator.
@@ -272,6 +281,7 @@ class AudioPlayer {
             }
 
             _setVolume(volume);
+            _updateLoopIcon(_loopTrack);
         };
 
         const _handleAudioLoadError = function(event) {
