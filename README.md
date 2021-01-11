@@ -33,6 +33,24 @@ Place the following code inside your`<head>...</head>` section, **before** any `
 
 Take all the code from [the player.htm file](player.htm) and add it to the main body of your page, preferably immediately before the `</body>` tag.
 
+#### 2.1 Fiddle with settings (Optional)
+
+There are a few configurable settings you can change at any time, all of which are on the `<audio>` element in the HTML code for the player.
+Avoid touching the `id` unless you've also been messing around with the script yourself and you know what you're doing, but the rest are fair game.
+
+It looks like this in your theme code, and I'll explain what the settings all do below:
+
+```html
+<audio id="audio" preload="auto" volume="0.5" data-loop-track="false" data-change-page-title="false">
+```
+
+- `preload` - Tells the browser whether or not to preload the first song as soon as the page loads. This can be set to:
+  - `auto`: load the whole audio file for the first track as soon as the page loads.
+  - `none`: disable preloading, the file will be loaded when the user clicks the Play button.
+- `volume` - Sets the default audio volume. Values between 0 and 1 are acceptable.
+- `data-loop-track` - Sets the default looping behaviour. Set this to `true` if you want to default the looping behaviour to `on`. Off by default.
+- `data-change-page-title` - Set this to `true` if you want the page title to change to indicate the currently playing song. Off by default.
+
 ### 3. Add a theme! (Optional)
 
 Themes consist of a small handful of style options, including:
