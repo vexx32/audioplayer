@@ -32,6 +32,8 @@ Take all the code from [the player.htm file](player.htm) and add it to the main 
 > 
 > Before adding songs, note that this player does not **host** any music, nor will it handle YouTube links.
 > [Most common audio formats](https://en.wikipedia.org/wiki/HTML5_audio#Supported_audio_coding_formats) are supported, so all you need to do is sort out where to store your songs so the player can access them directly for streaming the audio.
+>
+> [Dropbox](https://dropbox.com/) and [OpenDrive](https://www.opendrive.com/) are some possible ways to host the audio files; any service which allows you to upload a file and get a direct link to the hosted file will work.
 
 To add or modify the playlist songs for the audio player, all you need to do is add / update the `<source />` entries inside the `<audio></audio>` tags:
 
