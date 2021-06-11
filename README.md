@@ -32,13 +32,19 @@ To add or modify the songs for the audio player, all you need to do is add / upd
 
 https://github.com/vexx32/audioplayer/blob/839bdfe02a349be23f07fffe8b0bddbde11d99cd/player.htm#L44-L50
 
-The syntax is:
+The syntax is as follows:
 
 ```html
 <source src="https://site.com/url/to/audio.mp3" data-track-title="Track title goes here" />
 ```
 
-Make sure that all your `<source />` entries are **after** the opening `<audio>` tag, but **before** the closing `</audio>` tag.
+You will need one `<source />` tag for _each_ song you want to add to the playlist, copy and paste the above as many times as you need, and update the link and title.
+There is no limit to the number of songs in the playlist.
+
+Note that the player will automatically number the tracks based on the order they're entered here, so make sure that the order you add them in here is the order you want them shown in.
+You can always move them around later if you'd like!
+
+Just make sure that all your `<source />` entries are **after** the opening `<audio>` tag, but **before** the closing `</audio>` tag, and you'll be fine. 🙂
 
 #### 2.2 Fiddle with settings (Optional)
 
