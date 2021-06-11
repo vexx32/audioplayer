@@ -7,13 +7,6 @@ Credit where credit is due; the base code (which I've modified and extended to s
 
 ![example image of the audio player, showing the default pale white/grey theme](./themes/default/preview.png)
 
-- [How to Use](#how-to-use)
-  - [1. Add the style sheet to your page](#1-add-the-style-sheet-to-your-page)
-  - [2. Add the player HTML code to your page](#2-add-the-player-html-code-to-your-page)
-  - [3. Add a theme! (Optional)](#3-add-a-theme-optional)
-- [Custom Themes](#custom-themes)
-- [Contributing](#contributing)
-
 ## How to Use
 
 There are a couple of things you'll need in order to use this audio player.
@@ -33,7 +26,21 @@ Place the following code inside your`<head>...</head>` section, **before** any `
 
 Take all the code from [the player.htm file](player.htm) and add it to the main body of your page, preferably immediately before the `</body>` tag.
 
-#### 2.1 Fiddle with settings (Optional)
+#### 2.1 Add songs!
+
+To add or modify the songs for the audio player, all you need to do is add / update the `<source />` entries inside the `<audio></audio>` tags:
+
+https://github.com/vexx32/audioplayer/blob/839bdfe02a349be23f07fffe8b0bddbde11d99cd/player.htm#L44-L50
+
+The syntax is:
+
+```html
+<source src="https://site.com/url/to/audio.mp3" data-track-title="Track title goes here" />
+```
+
+Make sure that all your `<source />` entries are **after** the opening `<audio>` tag, but **before** the closing `</audio>` tag.
+
+#### 2.2 Fiddle with settings (Optional)
 
 There are a few configurable settings you can change at any time, all of which are on the `<audio>` element in the HTML code for the player.
 Avoid touching the `id` unless you've also been messing around with the script yourself and you know what you're doing, but the rest are fair game.
